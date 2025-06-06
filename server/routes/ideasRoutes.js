@@ -21,13 +21,13 @@ ideasRouter.param("ideaId", (req, res, next, id) => {
   }
 });
 
-ideasRouter.get("/ideas", (req, res, next) => {
+ideasRouter.get("/", (req, res, next) => {
   const ideas = getAllFromDatabase("ideas");
 
   res.send(ideas);
 });
 
-ideasRouter.post("/ideas", (req, res, next) => {
+ideasRouter.post("/", (req, res, next) => {
   const newIdea = addToDatabase("ideas", req.body);
 
   res.status(201).send(newIdea);

@@ -6,21 +6,22 @@ const {
   addToDatabase,
   getAllFromDatabase,
   deleteAllFromDatabase,
+  createMeeting,
 } = require("../db");
 
-meetingsRouter.get("/meetings", (req, res, next) => {
+meetingsRouter.get("/", (req, res, next) => {
   const meetings = getAllFromDatabase("meetings");
 
   res.status(200).send(meetings);
 });
 
-meetingsRouter.post("/meetings", (req, res, next) => {
-  const newMeeting = addToDatabase("meetings", req.body);
+meetingsRouter.post("/", (req, res, next) => {
+  const newMeeting = addToDatabase("meetings", createMeeting());
 
   res.status(201).send();
 });
 
-meetingsRouter.delete("/meetings", (req, res, next) => {
+meetingsRouter.delete("/", (req, res, next) => {
   const deletedMeeting = deleteAllFromDatabase("meetings");
 
   if (deletedMeeting) {

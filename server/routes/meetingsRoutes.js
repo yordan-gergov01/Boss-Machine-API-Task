@@ -25,9 +25,9 @@ meetingsRouter.delete("/", (req, res, next) => {
   const deletedMeeting = deleteAllFromDatabase("meetings");
 
   if (deletedMeeting) {
-    req.status(204).send();
+    res.status(204).send();
   } else {
-    req.status(500).send();
+    res.status(500).send();
   }
 });
 

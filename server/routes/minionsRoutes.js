@@ -53,4 +53,51 @@ minionsRouter.delete("/:minionId", (req, res, next) => {
   }
 });
 
+minionsRouter.param("workId", (req, res, next, id) => {
+  const work = getFromDatabaseById("work", id);
+
+  if (work) {
+    req.work = work;
+    next();
+  } else {
+    res.status(404).send();
+  }
+});
+
+minionsRouter.get("/:minionId/work", (req, res, next) => {
+  const allWork = getAllFromDatabase("work").filter((singleWork) => {
+    return singleWork.minionId === req.params.minionId;
+  });
+
+  res.send(allWork);
+});
+
+minionsRouter.post("/:minionId/work", (req, res, next) => {
+  const workToAdd = req.body;
+  workToAdd.minionId = req.params.minionId;
+
+  const newWork = addToDatabase("work", workToAdd);
+
+  res.status(201).send(newWork);
+});
+
+minionsRouter.put("/:minionId/work/:workId", (req, res, next) => {
+  if (req.params.minionId !== req.body.minionId) {
+    res.status(400).send();
+  } else {
+    updatedWork = updateInstanceInDatabase("work", req.body);
+    res.send(updatedWork);
+  }
+});
+
+minionsRouter.delete("/:minionId/work/:workId", (req, res, next) => {
+  const deletedWork = deleteFromDatabasebyId("work", req.params.workId);
+
+  if (deletedWork) {
+    res.status(204).send();
+  } else {
+    res.status(500).send();
+  }
+});
+
 module.exports = minionsRouter;

@@ -115,29 +115,6 @@ Take note that many values that could be numbers are in fact strings. Since we a
 
 - You will create a custom middleware function `checkMillionDollarIdea` that will come in handy in some /api/ideas routes. Write this function in the **server/checkMillionDollarIdea.js** file. This function will make sure that any new or updated ideas are still worth at least one million dollars! The total value of an idea is the product of its `numWeeks` and `weeklyRevenue` properties.
 
-### Bonus
-
-As a bonus, you may implement routes to allow bosses to add and remove work from their minions' backlogs.
-
-Schema:
-
-- Work:
-  - id: string
-  - title: string
-  - description: string
-  - hours: number
-  - minionId: string
-
-Routes required:
-
-- GET /api/minions/:minionId/work to get an array of all work for the specified minon.
-- POST /api/minions/:minionId/work to create a new work object and save it to the database.
-- PUT /api/minions/:minionId/work/:workId to update a single work by id.
-- DELETE /api/minions/:minionId/work/:workId to delete a single work by id.
-
-To work on the bonus with tests, you will need to remove their pending status. Open the **test/test.js** and edit that begins the /api/minions/:minionId/work routes tests. It should start with `xdescribe(` around line 689 of the test file. If you delete the `x` (so that the line simply starts with `describe(` and save the test file before re-running, your bonus tests will now be active.
-
-In order to fully implement these routes, the database helper functions may not provide all the functionality that you need, and you may need to use router parameters or other methods to attach the `minionId` properties correctly and handle the edge cases property. Good luck!
 
 ## Testing
 
